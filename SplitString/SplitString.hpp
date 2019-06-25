@@ -1,6 +1,6 @@
 /*
 Copyright (c) 2019 Inverse Palindrome
-Blog - Split.hpp
+Blog - SplitString.hpp
 https://inversepalindrome.com/
 */
 
@@ -13,7 +13,7 @@ https://inversepalindrome.com/
 #include <sstream>
 
 
-std::vector<std::string> split(const std::string& string)
+std::vector<std::string> split_string(const std::string& string)
 {
     std::istringstream i_stream(string);
 
@@ -21,7 +21,7 @@ std::vector<std::string> split(const std::string& string)
         std::istream_iterator<std::string>()};
 }
 
-std::vector<std::string> split(const std::string& string, char delimeter)
+std::vector<std::string> split_string(const std::string& string, char delimeter)
 {
     std::stringstream stream(string);
 
@@ -36,7 +36,7 @@ std::vector<std::string> split(const std::string& string, char delimeter)
     return tokens;
 }
 
-std::vector<std::string> split(const std::string& string, const std::string& delimeter)
+std::vector<std::string> split_string(const std::string& string, const std::string& delimeter)
 {
     std::size_t start_index = 0, end_index = 0;
 
