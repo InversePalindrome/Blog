@@ -12,7 +12,7 @@ https://inversepalindrome.com/
 #include <algorithm>
 
 
-void add_permutation1(std::vector<std::string>& permutations, std::string str, std::size_t curr_index)
+void add_permutation1(std::vector<std::string>& permutations, std::string& str, std::size_t curr_index)
 {
     if (curr_index == str.size() - 1)
     {
@@ -35,13 +35,15 @@ std::vector<std::string> get_permutations1(const std::string& str)
 {
     std::vector<std::string> permutations;
 
-    add_permutation1(permutations, str, 0);
+    auto str_cpy = str;
+
+    add_permutation1(permutations, str_cpy, 0);
 
     return permutations;
 }
 
 void add_permutation2(std::vector<std::string>& permutations, std::string str, 
-    std::string curr_permutation = "")
+    const std::string& curr_permutation = "")
 {
     if (str.empty())
     {
