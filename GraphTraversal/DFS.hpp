@@ -10,32 +10,33 @@ https://inversepalindrome.com/
 #include "UndirectedGraph.hpp"
 
 #include <stack>
-#include <iostream>
 #include <unordered_set>
 
 
-void DFS(const UndirectedGraph& graph, int vertex)
+template<typename VertexType, typename Function = std::invoke_result<void(VertexType&)>::type>
+void DFS(const UndirectedGraph<VertexType>& undirected_graph, VertexType current_vertex, 
+    const Function& process_vertex_function)
 {
-    std::stack<int> stack;
-    stack.push(vertex);
+    std::stack<VertexType> stack;
+    stack.push(current_vertex);
 
-    std::unordered_set<int> visited_vertices;
+    std::unordered_set<VertexType> visited_vertices;
 
     while (!stack.empty())
     {
-        vertex = stack.top();
+        current_vertex = stack.top();
         stack.pop();
 
-        if (visited_vertices.count(vertex))
+        if (visited_vertices.count(current_vertex))
         {
             continue;
         }
 
-        visited_vertices.insert(vertex);
+        visited_vertices.insert(current_vertex);
 
-        std::cout << vertex << ' ';
+        process_vertex_function(current_vertex);
 
-        for (auto neighbor_vertex : graph.at(vertex))
+        for (auto neighbor_vertex : undirected_graph.at(current_vertex))
         {
             stack.push(neighbor_vertex);
         }

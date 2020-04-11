@@ -11,9 +11,12 @@ https://inversepalindrome.com/
 #include <unordered_map>
 
 
-using UndirectedGraph = std::unordered_map<int, std::vector<int>>;
+template<typename VertexType>
+using UndirectedGraph = std::unordered_map<VertexType, std::vector<VertexType>>;
 
-void addEdge(UndirectedGraph& undirected_graph, int source, int destination)
+template<typename VertexType>
+void addEdge(UndirectedGraph<VertexType>& undirected_graph, 
+    const VertexType& source, const VertexType& destination)
 {
     undirected_graph[source].push_back(destination);
     undirected_graph[destination].push_back(source);

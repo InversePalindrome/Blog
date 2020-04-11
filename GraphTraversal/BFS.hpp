@@ -10,26 +10,27 @@ https://inversepalindrome.com/
 #include "UndirectedGraph.hpp"
 
 #include <queue>
-#include <iostream>
 #include <unordered_set>
 
 
-void BFS(const UndirectedGraph& undirected_graph, int vertex)
+template<typename VertexType, typename Function = std::invoke_result<void(VertexType&)>::type>
+void BFS(const UndirectedGraph<VertexType>& undirected_graph, VertexType current_vertex,
+    const Function& process_vertex_function)
 {
-    std::queue<int> queue;
-    queue.push(vertex);
+    std::queue<VertexType> queue;
+    queue.push(current_vertex);
 
-    std::unordered_set<int> visited_vertices;
-    visited_vertices.insert(vertex);
+    std::unordered_set<VertexType> visited_vertices;
+    visited_vertices.insert(current_vertex);
 
     while (!queue.empty())
     {
-        vertex = queue.front();
+        current_vertex = queue.front();
         queue.pop();
 
-        std::cout << vertex << ' ';
+        process_vertex_function(current_vertex);
         
-        for (auto neighbor_vertex : undirected_graph.at(vertex))
+        for (auto neighbor_vertex : undirected_graph.at(current_vertex))
         {
             if (!visited_vertices.count(neighbor_vertex))
             {
